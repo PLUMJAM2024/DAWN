@@ -15,7 +15,7 @@ public abstract class NPC : MonoBehaviour, Iinteractable
     void Update()
     {
         _Update();
-        if (Input.GetKeyDown(KeyCode.Space) && IsInteract())
+        if (Input.GetKeyDown(KeyCode.E) && IsInteract())
         {
             Interact();
         }
