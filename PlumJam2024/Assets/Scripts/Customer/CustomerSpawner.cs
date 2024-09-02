@@ -24,9 +24,9 @@ public class CustomerSpawner : MonoBehaviour
 
     IEnumerator GameStart() {
         Debug.LogError("준비 보이기 미구현");
-        //yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);
         Debug.LogError("시작 보이기 미구현");
-        //yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);
         while (GameManager.instance.isGame) {
             SpawnCustomer();
             yield return new WaitForSeconds(Random.Range(0, 16));
