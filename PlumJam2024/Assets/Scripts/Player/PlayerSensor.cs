@@ -11,7 +11,7 @@ public class PlayerSensor : MonoBehaviour
     Ray2D ray;
     Rigidbody2D playerRigid;
     private Player player;
-
+    
     
     void Start()
     {
@@ -48,6 +48,7 @@ public class PlayerSensor : MonoBehaviour
                     Debug.Log(player.servingMenu + "잘 받았습니다잇!");
                     hitCustomer.isReceived = true;
                     player.isServing = false;
+                    player.ShowServedFood(hitCustomer.menu, false);
                 }
                 else if(player.isServing && hitCustomer.menu != player.servingMenu)
                 {
@@ -82,4 +83,7 @@ public class PlayerSensor : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, -90f);
         }
     }
+
+    
+
 }
