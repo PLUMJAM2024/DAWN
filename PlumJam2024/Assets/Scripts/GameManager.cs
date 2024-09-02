@@ -33,6 +33,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddBalloon(bool plus) {
+        if (plus) {
+            if(currentBalloon < totalBalloon) {
+                currentBalloon++;
+            }
+        }
+        else {
+            if(currentBalloon > 0) {
+                currentBalloon--;
+            }
+        }
+    }
+
     void UpdateTimer() {
         totalGameTime -= Time.deltaTime;
         txt_timer.text = totalGameTime.ToString("N0");

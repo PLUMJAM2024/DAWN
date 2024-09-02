@@ -20,7 +20,7 @@ public class LeavingState : CustomerState
         Move();
         //도착 시 상태 변경
         if (customer.waypoints.Count == 0) {
-            Debug.LogError("풍선 추가 미구현");
+            GameManager.instance.AddBalloon(true);
             Destroy(gameObject);
         }
     }
