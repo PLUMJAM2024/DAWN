@@ -54,6 +54,9 @@ public class Customer : MonoBehaviour {
             Debug.LogError("잘못된 메뉴 전달");
             return; 
         }
+    }
 
+    public void OnDestroy() {
+        GameManager.instance.Customers.Remove(gameObject);
     }
 }

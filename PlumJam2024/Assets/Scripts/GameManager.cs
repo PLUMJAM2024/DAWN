@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text txt_timer;
     public TMP_Text txt_balloon;
     public Slider sld_balloon;
+
+    public List<GameObject> Customers = new List<GameObject>();
 
     private void Awake() {
         instance = this;
@@ -40,44 +43,46 @@ public class GameManager : MonoBehaviour
 
     public void AddBalloon(bool plus) {
         if (plus) {
-            if(currentBalloon < totalBalloon) {
-                currentBalloon++;
-            }
+            currentBalloon += Random.Range(1, 10);
         }
         else {
-            if(currentBalloon > 0) {
-                currentBalloon--;
+            currentBalloon -= Random.Range(1, 5);
+            if (currentBalloon < 0) {
+                currentBalloon = 0;
             }
         }
     }
 
     IEnumerator ToResultClear() {
         Debug.LogError("게임 클리어 표시 미구현");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Clear");
     }
 
     IEnumerator ToResultFail() {
         Debug.LogError("게임 실패 표시 미구현");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Fail");
     }
 
     void UpdateTimer() {
         totalGameTime -= Time.deltaTime;
-        txt_timer.text = totalGameTime.ToString("N0");
-        if (totalGameTime < 0) {
+        if (totalGameTime < 0 && GameManager.instance.Customers.Count <= 0) {
             isGame = false;
-            StartCoroutine(ToResultFail());
+            if(totalBalloon > currentBalloon) {
+                StartCoroutine(ToResultFail());
+            }
+            else {
+                StartCoroutine(ToResultClear());
+            }
+        }
+        else {
+            txt_timer.text = Mathf.Max(totalGameTime, 0).ToString("N0");
         }
     }
 
     void UpdateBalloon() {
         sld_balloon.value = currentBalloon;
         txt_balloon.text = $"{currentBalloon} / {totalBalloon}";
-        if(currentBalloon >= totalBalloon) {
-            isGame = false;
-            StartCoroutine(ToResultClear());
-        }
     }
 }

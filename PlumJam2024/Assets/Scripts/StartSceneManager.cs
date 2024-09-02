@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartSceneManager : MonoBehaviour
 {
     public void btn_Start() {
-        SceneManager.LoadScene("Player");
+        SceneManager.LoadScene("CutScene");
     }
 
     public void btn_Quit() {

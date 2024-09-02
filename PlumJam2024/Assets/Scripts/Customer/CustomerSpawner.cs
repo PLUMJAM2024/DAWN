@@ -27,7 +27,7 @@ public class CustomerSpawner : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Debug.LogError("시작 보이기 미구현");
         yield return new WaitForSeconds(1.5f);
-        while (GameManager.instance.isGame) {
+        while (GameManager.instance.isGame && GameManager.instance.totalGameTime > 0) {
             SpawnCustomer();
             yield return new WaitForSeconds(Random.Range(0, 16));
         }
@@ -52,5 +52,6 @@ public class CustomerSpawner : MonoBehaviour
         }
         GameObject customer = Instantiate(pre_customer[Random.Range(0, pre_customer.Length)], enterance.position, Quaternion.identity);
         customer.GetComponent<Customer>().init(selected_sit);
+        GameManager.instance.Customers.Add(customer);
     }
 }
