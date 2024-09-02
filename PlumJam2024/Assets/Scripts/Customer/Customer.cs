@@ -11,12 +11,14 @@ public class Customer : MonoBehaviour {
     public float menuWatingTime;
     public bool isReceived = false;
     public float enjoyingTime = 2f;
-    public readonly float moveSpeed = 3f;
+    public readonly float moveSpeed = .3f;
     public GameObject speechBubble;
     public GameObject emoji;
+    public Animator animator;
 
     private void Start() {
         stateMachine = gameObject.AddComponent<CustomerStateMachine>();
+        animator = GetComponent<Animator>();
         speechBubble.SetActive(false);
     }
 

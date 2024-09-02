@@ -4,6 +4,9 @@ public abstract class CustomerState : MonoBehaviour
 {
     protected CustomerStateMachine stateMachine;
     protected Customer customer;
+
+    protected Vector2 direction = Vector2.zero;
+
     public virtual void Enter(CustomerStateMachine stateMachine) {
         Debug.Log($"State : {this.GetType().Name}");
         this.stateMachine = stateMachine;

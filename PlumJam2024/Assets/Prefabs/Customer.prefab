@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5374503554556330109}
   - component: {fileID: 9107617810618790214}
   - component: {fileID: 5952123197823617347}
+  - component: {fileID: 4650022831662996381}
   m_Layer: 7
   m_Name: Customer
   m_TagString: Customer
@@ -107,8 +108,10 @@ MonoBehaviour:
   isOrdered: 0
   menuWatingTime: 0
   isReceived: 0
+  enjoyingTime: 2
   speechBubble: {fileID: 2480421026466167884}
   emoji: {fileID: 8641810299801783711}
+  animator: {fileID: 0}
 --- !u!61 &5952123197823617347
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -154,6 +157,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.5}
   m_EdgeRadius: 0
+--- !u!95 &4650022831662996381
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014248078380221939}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 813d2a2b2f005134ab853cf8b72a699d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2480421026466167884
 GameObject:
   m_ObjectHideFlags: 0

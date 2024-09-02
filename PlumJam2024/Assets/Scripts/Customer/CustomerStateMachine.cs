@@ -3,7 +3,7 @@ using UnityEngine;
 public class CustomerStateMachine : MonoBehaviour {
     public CustomerState Entering;
     public CustomerState OrderWaiting;
-    public CustomerState MenuWating;
+    public CustomerState MenuWaiting;
     public CustomerState Enjoying;
     public CustomerState Leaving;
     public CustomerState AngryLeaving;
@@ -13,7 +13,7 @@ public class CustomerStateMachine : MonoBehaviour {
     private void Start() {
         Entering = gameObject.AddComponent<EnteringState>();
         OrderWaiting = gameObject.AddComponent<OrderWatingState>();
-        MenuWating = gameObject.AddComponent<MenuWaitState>();
+        MenuWaiting = gameObject.AddComponent<MenuWaitState>();
         Enjoying = gameObject.AddComponent<EnjoyingState>();
         Leaving = gameObject.AddComponent<LeavingState>();
         AngryLeaving = gameObject.AddComponent<AngryLeavingState>();

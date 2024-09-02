@@ -12,7 +12,7 @@ public class OrderWatingState : CustomerState {
 
     public override void _Update() {
         if(customer.isOrdered) {
-            stateMachine.ChangeState(stateMachine.MenuWating);
+            stateMachine.ChangeState(stateMachine.MenuWaiting);
         }
         customer.orderWatingTime -= Time.deltaTime;
         if(customer.orderWatingTime < 0 ) {
