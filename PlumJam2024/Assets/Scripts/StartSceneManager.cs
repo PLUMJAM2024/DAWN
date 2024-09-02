@@ -12,4 +12,8 @@ public class StartSceneManager : MonoBehaviour
     public void btn_Quit() {
         Application.Quit();
     }
+
+    public void btn_StartScene() {
+        SceneManager.LoadScene("Start");
+    }
 }

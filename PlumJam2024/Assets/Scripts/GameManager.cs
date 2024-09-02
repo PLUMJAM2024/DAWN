@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -25,6 +27,10 @@ public class GameManager : MonoBehaviour
         sld_balloon.maxValue = totalBalloon;
     }
 
+    private void Update() {
+
+    }
+
     private void FixedUpdate() {
         if (isGame) {
             UpdateTimer();
@@ -45,12 +51,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator ToResultClear() {
+        Debug.LogError("게임 클리어 표시 미구현");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Clear");
+    }
+
+    IEnumerator ToResultFail() {
+        Debug.LogError("게임 실패 표시 미구현");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Fail");
+    }
+
     void UpdateTimer() {
         totalGameTime -= Time.deltaTime;
         txt_timer.text = totalGameTime.ToString("N0");
         if (totalGameTime < 0) {
             isGame = false;
-            Debug.LogError("게임 실패 미구현");
+            StartCoroutine(ToResultFail());
         }
     }
 
@@ -59,7 +77,7 @@ public class GameManager : MonoBehaviour
         txt_balloon.text = $"{currentBalloon} / {totalBalloon}";
         if(currentBalloon >= totalBalloon) {
             isGame = false;
-            Debug.LogError("게임 클리어 미구현");
+            StartCoroutine(ToResultClear());
         }
     }
 }
