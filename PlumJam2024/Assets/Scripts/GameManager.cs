@@ -11,9 +11,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Data")]
     public bool isGame = false;
-    public float totalGameTime = 60;
+    public float totalGameTime = 75;
     public int totalBalloon = 40;
     public int currentBalloon = 0;
+    public AudioClip pop;
 
     [Header("UI")]
     public TMP_Text txt_timer;
@@ -21,18 +22,16 @@ public class GameManager : MonoBehaviour
     public Slider sld_balloon;
     public GameObject finish;
 
+    private AudioSource audio;
     public List<GameObject> Customers = new List<GameObject>();
 
     private void Awake() {
         instance = this;
+        audio = GetComponent<AudioSource>();
     }
 
     private void Start() {
         sld_balloon.maxValue = totalBalloon;
-    }
-
-    private void Update() {
-
     }
 
     private void FixedUpdate() {
@@ -44,10 +43,12 @@ public class GameManager : MonoBehaviour
 
     public void AddBalloon(bool plus) {
         if (plus) {
-            currentBalloon += Random.Range(1, 10);
+            currentBalloon += Random.Range(3, 8);
         }
         else {
-            currentBalloon -= Random.Range(1, 5);
+            currentBalloon -= Random.Range(1, 4);
+            audio.clip = pop;
+            audio.Play();
             if (currentBalloon < 0) {
                 currentBalloon = 0;
             }
