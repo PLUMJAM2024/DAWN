@@ -1,10 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CutSceneFadeIn : MonoBehaviour
+public class FadeInOut : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private bool isFadein = true;
 
     private void Awake()
     {
@@ -20,14 +20,14 @@ public class CutSceneFadeIn : MonoBehaviour
     private IEnumerator Start()
     {
 
-        if (isFadein)
-            yield return TweenFade(1f, 0.5f);
-        else
+        var wfs = new WaitForSeconds(0.1f);
+
+        for (var i = 0; i < 10; i++)
         {
-            var color = spriteRenderer.color;
-            color.a = 1f;
-            spriteRenderer.color = color;
-            yield return null;
+            yield return TweenFade(0.5f, 0.2f);
+            yield return wfs;
+            yield return TweenFade(1f, 0.2f);
+            yield return wfs;
         }
     }
 

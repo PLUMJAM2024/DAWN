@@ -1,42 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
-public class CutSceneController : MonoBehaviour
+public class CutsceneController : MonoBehaviour
 {
     public PlayableDirector playableDirector;
-    private bool isPaused = false;  // 타임라인의 일시 중지 상태를 추적
+    private bool isTimelineFinished = false;
+    private bool isFirst = true;
+    [SerializeField] Text text;
+
+    void Start()
+    {
+        playableDirector.stopped += OnPlayableDirectorStopped;
+    }
 
     void Update()
     {
-        // 스페이스바가 눌렸는지 확인
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isTimelineFinished && isFirst)
         {
-            if (isPaused)
-            {
-                // 타임라인이 일시 중지된 상태라면 재개
-                playableDirector.Play();
-                isPaused = false;
-            }
-            else if (playableDirector.playableGraph.IsPlaying())
-            {
-                // 타임라인이 재생 중이면 일시 중지
-                playableDirector.Pause();
-                isPaused = true;
-            }
-            else
-            {
-                // 타임라인이 종료되었으면 다음 장면으로 전환
-                NextScene();
-            }
+            isFirst = false;
+            text.gameObject.SetActive(true);
+
+        }
+        if (isTimelineFinished && Input.GetKeyDown(KeyCode.Space))
+        {
+            LoadNextScene();
         }
     }
 
-    void NextScene()
+    void OnPlayableDirectorStopped(PlayableDirector director)
     {
-        // 여기서 다음 장면으로 넘어가는 코드를 작성
-        // 예: SceneManager.LoadScene("NextSceneName");
-        Debug.Log("Next Scene Loading...");
+        isTimelineFinished = true;
+    }
+
+    void LoadNextScene()
+    {
+        SceneManager.LoadScene("Player");
     }
 }
