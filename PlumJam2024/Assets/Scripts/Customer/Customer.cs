@@ -31,7 +31,7 @@ public class Customer : MonoBehaviour {
             waypoints.Add(dest.transform);
             sit = dest;
             orderWatingTime = Random.Range(4, 8);
-            menuWatingTime = Enums.MenuTime[menu] + Random.Range(4, 8);
+            menuWatingTime = Enums.MenuTime[menu] + Random.Range(99, 100);
         }
         else {
             for (int i = dest.wayPoints.Count - 1; i >= 0; i--) {

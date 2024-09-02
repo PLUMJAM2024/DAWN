@@ -11,6 +11,8 @@ public class PlayerSensor : MonoBehaviour
     Ray2D ray;
     Rigidbody2D playerRigid;
     private Player player;
+
+    
     void Start()
     {
         playerRigid = GetComponent<Rigidbody2D>();
@@ -24,13 +26,38 @@ public class PlayerSensor : MonoBehaviour
         int layerMask = LayerMask.GetMask("Customer");
         hit = Physics2D.Raycast(ray.origin, ray.direction, raycastDistance, layerMask);
 
-        if (Input.GetKeyDown(KeyCode.E) && hit.collider != null && hit.collider.GetComponent<Customer>().isOrdered == false)
-        {
-            Debug.Log("Hit: " + hit.collider.name);
-            hit.collider.GetComponent<Customer>().isOrdered = true;
-            player.menuQueue.Enqueue(hit.collider.GetComponent<Customer>().menu);
+        
 
-            Debug.Log("Ordered Menu: " + player.menuQueue.Peek());
+        if (Input.GetKeyDown(KeyCode.E) && hit.collider != null)
+        {
+            Customer hitCustomer = hit.collider.GetComponent<Customer>();
+
+            if (hitCustomer.isOrdered == false)
+            {
+                Debug.Log("Hit: " + hit.collider.name);
+                hit.collider.GetComponent<Customer>().isOrdered = true;
+                player.menuQueue.Enqueue(hitCustomer.menu);
+
+                Debug.Log("Ordered Menu: " + player.menuQueue.Peek());
+            }
+
+            if (hitCustomer.isOrdered == true)
+            {
+                if (player.isServing && hitCustomer.menu == player.servingMenu)
+                {
+                    Debug.Log(player.servingMenu + "잘 받았습니다잇!");
+                    hitCustomer.isReceived = true;
+                    player.isServing = false;
+                }
+                else if(player.isServing && hitCustomer.menu != player.servingMenu)
+                {
+                    Debug.Log(player.servingMenu + "저 이거 안시켰는데요?");
+                }
+                else if(!player.isServing)
+                {
+                    Debug.Log(player.servingMenu + "아직 들고있는게 없어요");
+                }
+            }
         }
     }
 
