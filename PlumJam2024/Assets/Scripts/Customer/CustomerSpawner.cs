@@ -10,7 +10,7 @@ public class CustomerSpawner : MonoBehaviour
     public Transform enterance;
 
     [Header("Prefabs")]
-    public GameObject pre_customer;
+    public GameObject[] pre_customer;
 
     public void Awake() {
         if (instance == null) {
@@ -50,7 +50,7 @@ public class CustomerSpawner : MonoBehaviour
             idx = Random.Range(0, sits.Length);
             selected_sit = sits[idx];
         }
-        GameObject customer = Instantiate(pre_customer, enterance.position, Quaternion.identity);
+        GameObject customer = Instantiate(pre_customer[Random.Range(0, pre_customer.Length)], enterance.position, Quaternion.identity);
         customer.GetComponent<Customer>().init(selected_sit);
     }
 }

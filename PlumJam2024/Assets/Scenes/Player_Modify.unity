@@ -5056,7 +5056,15 @@ MonoBehaviour:
   - {fileID: 124884264}
   - {fileID: 1578477494}
   enterance: {fileID: 365428228}
-  pre_customer: {fileID: 1014248078380221939, guid: dba0557fcca4a7b43bcc74bc189c39ce, type: 3}
+  pre_customer:
+  - {fileID: 1014248078380221939, guid: dba0557fcca4a7b43bcc74bc189c39ce, type: 3}
+  - {fileID: 1014248078380221939, guid: 03a4a9a7fa1e7b644b527cea15134b21, type: 3}
+  - {fileID: 1014248078380221939, guid: 28fb35d98e67b994db8fc4b4365f2f64, type: 3}
+  - {fileID: 1014248078380221939, guid: 161c5bcffddd61542b946600b987dca4, type: 3}
+  - {fileID: 1014248078380221939, guid: 17e2fd93c8679614181983d7f31c6f98, type: 3}
+  - {fileID: 1014248078380221939, guid: dc5c0b5579354ef40b095628720c9fca, type: 3}
+  - {fileID: 1014248078380221939, guid: a25b655979d6f944d904232422b691ca, type: 3}
+  - {fileID: 1014248078380221939, guid: ed3c08c466aebc74fbea45e77d98c456, type: 3}
 --- !u!4 &1401210361
 Transform:
   m_ObjectHideFlags: 0
