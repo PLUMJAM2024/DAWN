@@ -26,7 +26,7 @@ public class Customer : MonoBehaviour {
 
     public void init(Sit dest, bool reverse = false) {
         var enumValue = System.Enum.GetValues(enumType:typeof(Enums.Menu)); 
-        menu = (Enums.Menu)enumValue.GetValue(Random.Range(0, enumValue.Length));
+        menu = (Enums.Menu)enumValue.GetValue(Random.Range(1, enumValue.Length));
 
         if(!reverse) {
             for (int i = 0; i < dest.wayPoints.Count; i++) {
@@ -54,6 +54,9 @@ public class Customer : MonoBehaviour {
             Debug.LogError("잘못된 메뉴 전달");
             return; 
         }
+    }
 
+    public void OnDestroy() {
+        GameManager.instance.Customers.Remove(gameObject);
     }
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Serika
+  m_Controller: {fileID: 9100000, guid: 813d2a2b2f005134ab853cf8b72a699d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8b5cf2e143878254199809246edf9620, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2eb27fab69316514588c6cca93811ed8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1674a6fe6e516bb4795fa6ccaf78c101, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a361636a4ce86eb4da4463a07375e85f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9c3e4148b3ddc5245b06523344162e6c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e81a5a987a11cd946a5b5a4421e35f69, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: cb9abe37f3796434a8c0d8a1b3d3f1aa, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 61f1bd8695d759c4cad333592a06722b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4558801122ec27d4c99a0863ad060d0c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f167a45d8c6d65f4383cb89eec4f9fbc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 96d5d292401de0949a35a5818d9ad461, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 61f1bd8695d759c4cad333592a06722b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d4205d06bc350404c8ba0da762ecca7f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b7bdb7a64aa38a9458af06c896e66e48, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3b9cd9076f19ca3459506ad7e3a8c460, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 242704b0a8c1ab849948b0d781377f7d, type: 2}
