@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject bread;
     [SerializeField] GameObject coffee;
 
+    public GameObject[] completeFood = new GameObject[5];
+
     public void ShowServedFood(Enums.Menu menu, bool isShow)
     {
         if (!isShow)
