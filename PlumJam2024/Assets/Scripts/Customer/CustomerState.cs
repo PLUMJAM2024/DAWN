@@ -57,4 +57,35 @@ public abstract class CustomerState : MonoBehaviour
         //말풍선 비활성화
         customer.speechBubble.SetActive(false);
     }
+
+    protected bool ishori;
+    protected bool isvert;
+
+    protected void Animate() {
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) {
+            ishori = true;
+            isvert = false;
+            customer.animator.SetBool("ischanged", true);
+        }
+        if (Mathf.Abs(direction.x) < Mathf.Abs(direction.y)) {
+            ishori = false;
+            isvert = true;
+            customer.animator.SetBool("ischanged", true);
+        }
+        if (direction == Vector2.zero) {
+            ishori = false;
+            isvert = false;
+            customer.animator.SetBool("ischanged", true);
+        }
+
+        if (ishori != customer.animator.GetBool("ishori")
+            || isvert != customer.animator.GetBool("isvert")) {
+            customer.animator.SetBool("ischanged", false);
+        }
+
+        customer.animator.SetBool("ishori", ishori);
+        customer.animator.SetBool("isvert", isvert);
+        customer.animator.SetFloat("hori", direction.x);
+        customer.animator.SetFloat("vert", direction.y);
+    }
 }

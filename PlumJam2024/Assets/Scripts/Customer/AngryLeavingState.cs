@@ -29,6 +29,7 @@ public class AngryLeavingState : CustomerState
             customer.sit.isUsing = false;
         }
         if (customer.waypoints.Count != 0) {
+            direction = (customer.waypoints[0].position - transform.position).normalized;
             transform.position
                 = Vector3.MoveTowards(
                     transform.position,
@@ -39,5 +40,6 @@ public class AngryLeavingState : CustomerState
                 customer.waypoints.RemoveAt(0);
             }
         }
+        Animate();
     }
 }

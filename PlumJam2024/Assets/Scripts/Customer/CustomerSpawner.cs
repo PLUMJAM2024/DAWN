@@ -17,6 +17,10 @@ public class CustomerSpawner : MonoBehaviour
         }
     }
 
+    private void Start() {
+        SpawnCustomer();
+    }
+
     public void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
             Debug.LogAssertion("손님 자동 생성 미구현");

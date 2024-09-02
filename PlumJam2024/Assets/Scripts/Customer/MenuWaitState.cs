@@ -3,8 +3,9 @@ using UnityEngine;
 public class MenuWaitState : CustomerState {
     public override void Enter(CustomerStateMachine stateMachine) {
         base.Enter(stateMachine);
-
         ShowEmoji(Enums.Emoji.menuwaiting);
+        direction = Vector2.zero;
+        Animate();
     }
 
     public override void Exit() {

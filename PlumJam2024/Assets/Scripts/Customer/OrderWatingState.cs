@@ -5,6 +5,8 @@ public class OrderWatingState : CustomerState {
         base.Enter(stateMachine);
 
         ShowEmoji(Enums.Emoji.orderwaiting);
+        direction = Vector2.zero;
+        Animate();
     }
 
     public override void Exit() {
