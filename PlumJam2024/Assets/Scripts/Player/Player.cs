@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
         {
             ShowServedFood(servingMenu, false);
             servingMenu = Enums.Menu.None;
+            isServing = false;
         }
     }
 }

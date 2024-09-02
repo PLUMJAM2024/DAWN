@@ -69,7 +69,7 @@ public class Chef : NPC
 
     private void GiveCook()
     {
-        
+        if(CompleteQueue.Count == 0) { return; }
         player.isServing = true;
         player.servingMenu = CompleteQueue.Dequeue();
         Debug.Log(player.servingMenu + "¼­ºù ½ÃÀÛ!");
