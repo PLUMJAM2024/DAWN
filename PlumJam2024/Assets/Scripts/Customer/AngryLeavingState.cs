@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class AngryLeavingState : CustomerState
 {
@@ -19,6 +20,7 @@ public class AngryLeavingState : CustomerState
         Move();
         //도착 시 상태 변경
         if (customer.waypoints.Count == 0) {
+            Debug.LogError("풍선 차감 미구현");
             Destroy(gameObject);
         }
     }
