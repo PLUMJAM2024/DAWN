@@ -1,8 +1,13 @@
 using UnityEngine;
 
 public class EnteringState : CustomerState {
+    public override void Enter(CustomerStateMachine stateMachine) {
+        base.Enter(stateMachine);
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
+
     public override void Exit() {
-        
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public override void _Update() {

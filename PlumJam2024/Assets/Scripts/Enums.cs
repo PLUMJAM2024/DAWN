@@ -14,4 +14,11 @@ public class Enums {
     { Menu.coffee, 6f }
     };
 
+
+    public enum Emoji {
+        orderwaiting,
+        menuwaiting,
+        enjoying,
+        angryleaving
+    }
 }

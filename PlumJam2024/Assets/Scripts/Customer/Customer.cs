@@ -10,14 +10,20 @@ public class Customer : MonoBehaviour {
     public bool isOrdered = false;
     public float menuWatingTime;
     public bool isReceived = false;
-    public readonly float enjoyingTime = 2f;
+    public float enjoyingTime = 2f;
     public readonly float moveSpeed = 3f;
+    public GameObject speechBubble;
+    public GameObject emoji;
 
     private void Start() {
         stateMachine = gameObject.AddComponent<CustomerStateMachine>();
+        speechBubble.SetActive(false);
     }
 
     public void init(Sit dest, bool reverse = false) {
+        var enumValue = System.Enum.GetValues(enumType:typeof(Enums.Menu)); 
+        menu = (Enums.Menu)enumValue.GetValue(Random.Range(0, enumValue.Length));
+
         if(!reverse) {
             for (int i = 0; i < dest.wayPoints.Count; i++) {
                 waypoints.Add(dest.wayPoints[i]);

@@ -6,9 +6,12 @@ public class AngryLeavingState : CustomerState
         base.Enter(stateMachine);
         //경로를 거꾸로 입력
         customer.init(customer.sit, true);
+        ShowEmoji(Enums.Emoji.angryleaving);
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public override void Exit() {
+
     }
 
     public override void _Update() {

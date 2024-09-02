@@ -1,6 +1,12 @@
 using UnityEngine;
 
 public class OrderWatingState : CustomerState {
+    public override void Enter(CustomerStateMachine stateMachine) {
+        base.Enter(stateMachine);
+
+        ShowEmoji(Enums.Emoji.orderwaiting);
+    }
+
     public override void Exit() {
     }
 
@@ -8,10 +14,11 @@ public class OrderWatingState : CustomerState {
         if(customer.isOrdered) {
             stateMachine.ChangeState(stateMachine.MenuWating);
         }
-        Debug.LogError("원하는 메뉴 표시 미구현");
         customer.orderWatingTime -= Time.deltaTime;
         if(customer.orderWatingTime < 0 ) {
             stateMachine.ChangeState(stateMachine.AngryLeaving);
         }
     }
+
+    
 }
