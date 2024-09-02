@@ -8,8 +8,8 @@ public class PlayerAction : MonoBehaviour
 
     Rigidbody2D rigid;
     Animator anim;
-    float h;
-    float v;
+    public float h;
+    public float v;
     bool isHorizonMove;
 
     void Awake()

@@ -10,8 +10,11 @@ public class PlayerSensor : MonoBehaviour
     private Player player;
     private Vector2 rayDirection;
 
+    private PlayerAction action;
+
     void Start()
     {
+        action = GetComponent<PlayerAction>();
         playerRigid = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
         rayDirection = Vector2.down;
@@ -63,19 +66,19 @@ public class PlayerSensor : MonoBehaviour
     {
         Vector2 velocity = playerRigid.velocity;
 
-        if (velocity.x > 0f)
+        if (action.h > 0f)
         {
             rayDirection = Vector2.right;
         }
-        else if (velocity.x < 0f)
+        else if (action.h < 0f)
         {
             rayDirection = Vector2.left;
         }
-        else if (velocity.y > 0f)
+        else if (action.v > 0f)
         {
             rayDirection = Vector2.up;
         }
-        else if (velocity.y < 0f)
+        else if (action.v < 0f)
         {
             rayDirection = Vector2.down;
         }
