@@ -73,6 +73,7 @@ public class Chef : NPC
         player.isServing = true;
         player.servingMenu = CompleteQueue.Dequeue();
         Debug.Log(player.servingMenu + "서빙 시작!");
+        player.ShowServedFood(player.servingMenu, true);
     }
 
     private void Break()
@@ -88,7 +89,7 @@ public class Chef : NPC
         cookingCount++;
         Enums.Menu currentCook = CookingQueue.Dequeue();
         Debug.Log(currentCook + " 조리 시작!");
-        yield return new WaitForSeconds(Enums.MenuTime[menu]);
+        yield return new WaitForSeconds(Enums.MenuTime[currentCook]);
         currentState = State.Complete;
         Debug.Log(currentCook + " 조리 완료!");
         CompleteQueue.Enqueue(currentCook);
