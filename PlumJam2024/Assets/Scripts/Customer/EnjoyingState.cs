@@ -10,6 +10,7 @@ public class EnjoyingState : CustomerState {
         ShowEmoji(Enums.Emoji.enjoying);
         direction = Vector2.zero;
         Animate();
+        GameManager.instance.AddBalloon(true);
     }
 
     public override void Exit() {

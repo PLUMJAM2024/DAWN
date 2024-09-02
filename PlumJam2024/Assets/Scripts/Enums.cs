@@ -4,16 +4,24 @@ public class Enums {
 
     public enum Menu {
         None,
-        bread,
-        cake,
-        coffee
+        cheesecake,
+        chocolatecake,
+        cookiecheesecake,
+        croissant,
+        pancake,
+        chocolatepancake,
+        tirimasu
     }
 
     public static Dictionary<Menu, float> MenuTime = new Dictionary<Menu, float>() {
-        {Menu.None, 0f },
-    { Menu.bread, 4f },
-    { Menu.cake, 8f },
-    { Menu.coffee, 6f }
+        { Menu.None, 0f },
+        { Menu.cheesecake, 4f },
+        { Menu.chocolatecake, 8f },
+        { Menu.cookiecheesecake, 6f },
+        { Menu.croissant, 6f },
+        { Menu.pancake, 4f },
+        { Menu.chocolatepancake, 6f },
+        { Menu.tirimasu, 12f }
     };
 
 

@@ -9,6 +9,10 @@ public class CustomerSpawner : MonoBehaviour
     public Sit[] sits;
     public Transform enterance;
 
+    [Header("UIs")]
+    public GameObject ready;
+    public GameObject go;
+
     [Header("Prefabs")]
     public GameObject[] pre_customer;
 
@@ -23,10 +27,15 @@ public class CustomerSpawner : MonoBehaviour
     }
 
     IEnumerator GameStart() {
-        Debug.LogError("준비 보이기 미구현");
+        GameManager.instance.isGame = false;
+        ready.SetActive(true);
+        go.SetActive(false);
         yield return new WaitForSeconds(1.5f);
-        Debug.LogError("시작 보이기 미구현");
+        ready.SetActive(false);
+        go.SetActive(true);
         yield return new WaitForSeconds(1.5f);
+        go.SetActive(false);
+        GameManager.instance.isGame = true;
         while (GameManager.instance.isGame && GameManager.instance.totalGameTime > 0) {
             SpawnCustomer();
             yield return new WaitForSeconds(Random.Range(0, 16));

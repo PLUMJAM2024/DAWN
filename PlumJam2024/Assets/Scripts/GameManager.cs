@@ -10,15 +10,16 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("Data")]
-    public bool isGame = true;
-    public float totalGameTime = 180;
-    public int totalBalloon = 70;
+    public bool isGame = false;
+    public float totalGameTime = 60;
+    public int totalBalloon = 40;
     public int currentBalloon = 0;
 
     [Header("UI")]
     public TMP_Text txt_timer;
     public TMP_Text txt_balloon;
     public Slider sld_balloon;
+    public GameObject finish;
 
     public List<GameObject> Customers = new List<GameObject>();
 
@@ -54,13 +55,13 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator ToResultClear() {
-        Debug.LogError("게임 클리어 표시 미구현");
+        finish.SetActive(true);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Clear");
     }
 
     IEnumerator ToResultFail() {
-        Debug.LogError("게임 실패 표시 미구현");
+        finish.SetActive(true);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Fail");
     }

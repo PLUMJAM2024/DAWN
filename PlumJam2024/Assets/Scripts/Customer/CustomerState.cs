@@ -34,12 +34,20 @@ public abstract class CustomerState : MonoBehaviour
             case Enums.Emoji.menuwaiting:
                 //주문한 메뉴 머리에 띄우기
                 switch (customer.menu) {
-                    case Enums.Menu.cake:
-                        return DataContainer.instance.cake;
-                    case Enums.Menu.bread:
-                        return DataContainer.instance.bread;
-                    case Enums.Menu.coffee:
-                        return DataContainer.instance.coffee;
+                    case Enums.Menu.cheesecake:
+                        return DataContainer.instance.cheesecake;
+                    case Enums.Menu.chocolatecake:
+                        return DataContainer.instance.chocolatecake;
+                    case Enums.Menu.cookiecheesecake:
+                        return DataContainer.instance.cookiecheesecake;
+                    case Enums.Menu.croissant:
+                        return DataContainer.instance.croissant;
+                    case Enums.Menu.pancake:
+                        return DataContainer.instance.pancake;
+                    case Enums.Menu.chocolatepancake:
+                        return DataContainer.instance.chocolatepancake;
+                    case Enums.Menu.tirimasu:
+                        return DataContainer.instance.tirimasu;
                     default:
                         Debug.LogError("일치하는 스프라이트 없음");
                         return null;

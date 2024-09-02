@@ -18,7 +18,6 @@ public class LeavingState : CustomerState
         Move();
         //도착 시 상태 변경
         if (customer.waypoints.Count == 0) {
-            GameManager.instance.AddBalloon(true);
             Destroy(gameObject);
         }
     }

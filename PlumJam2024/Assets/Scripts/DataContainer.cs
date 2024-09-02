@@ -10,9 +10,14 @@ public class DataContainer : MonoBehaviour
     public Sprite orderWaiting;
     public Sprite enjoying;
     public Sprite angryLeaving;
-    public Sprite bread;
-    public Sprite cake;
-    public Sprite coffee;
+    public Sprite cheesecake;
+    public Sprite chocolatecake;
+    public Sprite cookiecheesecake;
+    public Sprite croissant;
+    public Sprite pancake;
+    public Sprite chocolatepancake;
+    public Sprite tirimasu;
+
 
     private void Awake() {
         instance = this;
