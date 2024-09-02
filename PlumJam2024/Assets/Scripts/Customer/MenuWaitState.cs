@@ -8,7 +8,7 @@ public class MenuWaitState : CustomerState {
         if(customer.isReceived) {
             stateMachine.ChangeState(stateMachine.Enjoying);
         }
-        Debug.LogError("메뉴 대기시간 표시 미구현");
+        //Debug.LogError("메뉴 대기시간 표시 미구현");
         customer.menuWatingTime -= Time.deltaTime;
         if(customer.menuWatingTime < 0) {
             stateMachine.ChangeState(stateMachine.AngryLeaving);
