@@ -5,6 +5,7 @@ public class EnjoyingState : CustomerState {
         base.Enter(stateMachine);
         GetComponent<BoxCollider2D>().enabled = false;
         customer.enjoyingTime += Random.Range(0, 2);
+        ShowEmoji(Enums.Emoji.enjoying);
     }
 
     public override void Exit() {
