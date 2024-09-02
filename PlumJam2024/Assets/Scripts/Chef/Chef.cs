@@ -8,6 +8,9 @@ public class Chef : NPC
     public Queue<Enums.Menu> WaitingQueue = new Queue<Enums.Menu>(8);
     public Queue<Enums.Menu> CookingQueue = new Queue<Enums.Menu>(8);
     public Queue<Enums.Menu> CompleteQueue = new Queue<Enums.Menu>(8);
+
+    [SerializeField] private Slider slider1;
+    [SerializeField] private Slider slider2;
     enum State
     {
         Cook, Break, Complete
@@ -74,11 +77,35 @@ public class Chef : NPC
         player.servingMenu = CompleteQueue.Dequeue();
         Debug.Log(player.servingMenu + "서빙 시작!");
         player.ShowServedFood(player.servingMenu, true);
+        PickComplete();
     }
 
     private void Break()
     {
         currentState = State.Cook;
+    }
+
+    private void CookComplete()
+    {
+        foreach(var item in player.completeFood)
+        {
+            if(item.activeSelf == false)
+            {
+                item.SetActive(true);
+                break;
+            }
+        }
+    }
+    private void PickComplete()
+    {
+        foreach (var item in player.completeFood)
+        {
+            if (item.activeSelf == true)
+            {
+                item.SetActive(false);
+                break;
+            }
+        }
     }
     IEnumerator Cooking(int slot)
     {
@@ -86,13 +113,49 @@ public class Chef : NPC
         {
             yield break;
         }
+
+        Slider slider = null;
+
+        // 슬라이더 설정
+        if (slot == 1)
+        {
+            slider = slider1.GetComponent<Slider>();
+            slider1.gameObject.SetActive(true);
+        }
+        else if (slot == 2)
+        {
+            slider = slider2.GetComponent<Slider>();
+            slider2.gameObject.SetActive(true);
+        }
+        if (slider == null)
+        {
+            Debug.LogError("Slider not found for slot: " + slot);
+            yield break;
+        }
         cookingCount++;
         Enums.Menu currentCook = CookingQueue.Dequeue();
         Debug.Log(currentCook + " 조리 시작!");
-        yield return new WaitForSeconds(Enums.MenuTime[currentCook]);
+
+        float duration = Enums.MenuTime[currentCook];
+        slider.maxValue = duration;  // 슬라이더의 최대값을 설정
+
+        float elapsedTime = 0f;
+        slider.maxValue = duration;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            slider.value = elapsedTime;  // 슬라이더 값을 현재 경과 시간으로 설정
+            yield return null;
+        }
+
         currentState = State.Complete;
         Debug.Log(currentCook + " 조리 완료!");
         CompleteQueue.Enqueue(currentCook);
+
+        // 슬라이더 초기화
+        slider.value = 0;
+        slider.gameObject.SetActive(false);
 
         if (slot == 1)
         {
@@ -102,7 +165,9 @@ public class Chef : NPC
         {
             cooking2 = null;
         }
+        CookComplete();
         cookingCount--;
     }
+
 }
 
