@@ -8,6 +8,7 @@ public class AngryLeavingState : CustomerState
         customer.init(customer.sit, true);
         ShowEmoji(Enums.Emoji.angryleaving);
         GetComponent<BoxCollider2D>().enabled = false;
+
     }
 
     public override void Exit() {

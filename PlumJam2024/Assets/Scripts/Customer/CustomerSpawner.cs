@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
@@ -18,13 +19,17 @@ public class CustomerSpawner : MonoBehaviour
     }
 
     private void Start() {
-        SpawnCustomer();
+        StartCoroutine(GameStart());
     }
 
-    public void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Debug.LogAssertion("손님 자동 생성 미구현");
+    IEnumerator GameStart() {
+        Debug.LogError("준비 보이기 미구현");
+        yield return new WaitForSeconds(1.5f);
+        Debug.LogError("시작 보이기 미구현");
+        yield return new WaitForSeconds(1.5f);
+        while (GameManager.instance.isGame) {
             SpawnCustomer();
+            yield return new WaitForSeconds(Random.Range(0, 16));
         }
     }
 

@@ -1,9 +1,11 @@
 using UnityEngine;
 
 public class MenuWaitState : CustomerState {
+    private float maxTime;
     public override void Enter(CustomerStateMachine stateMachine) {
         base.Enter(stateMachine);
         ShowEmoji(Enums.Emoji.menuwaiting);
+        maxTime = customer.menuWaitingTime;
         direction = Vector2.zero;
         Animate();
     }
@@ -12,11 +14,12 @@ public class MenuWaitState : CustomerState {
     }
 
     public override void _Update() {
-        if(customer.isReceived) {
+        if (customer.isReceived) {
             stateMachine.ChangeState(stateMachine.Enjoying);
         }
-        customer.menuWatingTime -= Time.deltaTime;
-        if(customer.menuWatingTime < 0) {
+        customer.menuWaitingTime -= Time.deltaTime;
+        customer.timer.fillAmount = customer.menuWaitingTime / maxTime;
+        if (customer.menuWaitingTime < 0) {
             stateMachine.ChangeState(stateMachine.AngryLeaving);
         }
     }

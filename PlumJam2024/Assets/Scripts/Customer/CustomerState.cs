@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class CustomerState : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public abstract class CustomerState : MonoBehaviour
         Debug.Log($"State : {this.GetType().Name}");
         this.stateMachine = stateMachine;
         customer = GetComponent<Customer>();
+        customer.timer.fillAmount = 1;
     }
 
     public abstract void _Update();
@@ -19,9 +21,10 @@ public abstract class CustomerState : MonoBehaviour
 
     public virtual void ShowEmoji(Enums.Emoji emoji) {
         //말풍선 활성화
-        customer.speechBubble.SetActive(true);
+        customer.canvas.SetActive(true);
         //말풍선에 이모지 그리기
-        customer.emoji.GetComponent<SpriteRenderer>().sprite = GetEmojiSprite(emoji);
+        customer.emoji.GetComponent<Image>().sprite = GetEmojiSprite(emoji);
+        customer.timer.GetComponent<Image>().sprite = GetEmojiSprite(emoji);
     }
 
     Sprite GetEmojiSprite(Enums.Emoji emoji) {
@@ -55,7 +58,7 @@ public abstract class CustomerState : MonoBehaviour
 
     public virtual void HideEmoji() {
         //말풍선 비활성화
-        customer.speechBubble.SetActive(false);
+        customer.canvas.SetActive(false);
     }
 
     protected bool ishori;
