@@ -85,16 +85,69 @@ public class Chef : NPC
         currentState = State.Cook;
     }
 
-    private void CookComplete()
+    private void CookComplete(Enums.Menu currentMenu)
     {
-        foreach(var item in player.completeFood)
+        foreach (var item in player.completeFood)
         {
-            if(item.activeSelf == false)
+            if (item.activeSelf == false)
             {
                 item.SetActive(true);
+                SpriteRenderer spriteRenderer = item.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    Sprite chosenSprite = CurrentSpriteChoicer(currentMenu);
+                    if (chosenSprite != null)
+                    {
+                        spriteRenderer.sprite = chosenSprite;
+                        Debug.Log("스프라이트 변경 성공");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("스프라이트 null");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("SpriteRenderer 컴포넌트X");
+                }
                 break;
             }
         }
+    }
+
+    private Sprite CurrentSpriteChoicer(Enums.Menu currentMenu)
+    {
+        
+        Sprite currentSprite = null;
+        if(currentMenu == Enums.Menu.cheesecake)
+        {
+            currentSprite = DataContainer.instance.cheesecake;
+        }
+        if (currentMenu == Enums.Menu.pancake)
+        {
+            currentSprite = DataContainer.instance.pancake;
+        }
+        if (currentMenu == Enums.Menu.chocolatepancake)
+        {
+            currentSprite = DataContainer.instance.chocolatepancake;
+        }
+        if (currentMenu == Enums.Menu.chocolatecake)
+        {
+            currentSprite = DataContainer.instance.chocolatecake;
+        }
+        if (currentMenu == Enums.Menu.cookiecheesecake)
+        {
+            currentSprite = DataContainer.instance.cookiecheesecake;
+        }
+        if (currentMenu == Enums.Menu.croissant)
+        {
+            currentSprite = DataContainer.instance.croissant;
+        }
+        if (currentMenu == Enums.Menu.tirimasu)
+        {
+            currentSprite = DataContainer.instance.tirimasu;
+        }
+        return currentSprite;
     }
     private void PickComplete()
     {
@@ -107,13 +160,44 @@ public class Chef : NPC
             }
         }
     }
+    private void CookingStart(Enums.Menu currentMenu)
+    {
+        foreach (var item in player.cookingFood)
+        {
+            if (item.activeSelf == false)
+            {
+                item.SetActive(true);
+                SpriteRenderer spriteRenderer = item.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    Sprite chosenSprite = CurrentSpriteChoicer(currentMenu);
+                    if (chosenSprite != null)
+                    {
+                        spriteRenderer.sprite = chosenSprite;
+                        Debug.Log("스프라이트 변경 성공");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("스프라이트 null");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("SpriteRenderer 컴포넌트X");
+                }
+                break;
+            }
+        }
+    }
+
     IEnumerator Cooking(int slot)
     {
+
         if (cookingCount >= 2)
         {
             yield break;
         }
-
+        
         Slider slider = null;
 
         // 슬라이더 설정
@@ -134,6 +218,7 @@ public class Chef : NPC
         }
         cookingCount++;
         Enums.Menu currentCook = CookingQueue.Dequeue();
+        CookingStart(currentCook);
         Debug.Log(currentCook + " 조리 시작!");
 
         float duration = Enums.MenuTime[currentCook];
@@ -160,12 +245,14 @@ public class Chef : NPC
         if (slot == 1)
         {
             cooking1 = null;
+            player.cookingFood[0].SetActive(false);
         }
         else if (slot == 2)
         {
             cooking2 = null;
+            player.cookingFood[1].SetActive(false);
         }
-        CookComplete();
+        CookComplete(currentCook);
         cookingCount--;
     }
 
