@@ -92,6 +92,7 @@ public class Chef : NPC
         {
             if (item.activeSelf == false)
             {
+                player.readyQueue.Enqueue(item);
                 item.SetActive(true);
                 SpriteRenderer spriteRenderer = item.GetComponent<SpriteRenderer>();
                 if (spriteRenderer != null)
@@ -152,14 +153,8 @@ public class Chef : NPC
     }
     private void PickComplete()
     {
-        foreach (var item in player.completeFood)
-        {
-            if (item.activeSelf == true)
-            {
-                item.SetActive(false);
-                break;
-            }
-        }
+            player.readyQueue.Dequeue().SetActive(false);
+
     }
     private void CookingStart(Enums.Menu currentMenu)
     {
@@ -220,6 +215,7 @@ public class Chef : NPC
         cookingCount++;
         Enums.Menu currentCook = CookingQueue.Dequeue();
         CookingStart(currentCook);
+        
         Debug.Log(currentCook + " 조리 시작!");
 
         float duration = Enums.MenuTime[currentCook];
@@ -238,7 +234,7 @@ public class Chef : NPC
         currentState = State.Complete;
         Debug.Log(currentCook + " 조리 완료!");
         CompleteQueue.Enqueue(currentCook);
-
+        
         // 슬라이더 초기화
         slider.value = 0;
         slider.gameObject.SetActive(false);

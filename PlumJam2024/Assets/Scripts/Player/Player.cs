@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     public Queue<Enums.Menu> menuQueue = new Queue<Enums.Menu>(8);
+    public Queue<GameObject> readyQueue = new Queue<GameObject>(8);
     public Enums.Menu servingMenu = Enums.Menu.None;
     public bool isServing = false;
 
