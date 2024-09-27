@@ -4,7 +4,7 @@ public class OrderWatingState : CustomerState {
     private float maxTime;
     public override void Enter(CustomerStateMachine stateMachine) {
         base.Enter(stateMachine);
-        ShowEmoji(Enums.Emoji.orderwaiting);
+        ShowEmoji(DataManager.instance.emojis["orderwaiting"]);
         maxTime = customer.orderWaitingTime;
         direction = Vector2.zero;
         Animate();

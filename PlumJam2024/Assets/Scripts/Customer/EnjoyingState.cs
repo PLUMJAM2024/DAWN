@@ -7,7 +7,7 @@ public class EnjoyingState : CustomerState {
         GetComponent<BoxCollider2D>().enabled = false;
         customer.enjoyingTime += Random.Range(0, 2);
         maxtime = customer.enjoyingTime;
-        ShowEmoji(Enums.Emoji.enjoying);
+        ShowEmoji(DataManager.instance.emojis["enjoying"]);
         direction = Vector2.zero;
         Animate();
         GameManager.instance.AddBalloon(true);

@@ -6,7 +6,7 @@ public class Customer : MonoBehaviour {
     public List<Transform> waypoints = new List<Transform>();
     public Sit sit;
     public CustomerStateMachine stateMachine;
-    public Enums.Menu menu;
+    public MenuSO menu;
     public float orderWaitingTime;
     public bool isOrdered = false;
     public float menuWaitingTime;
@@ -25,17 +25,18 @@ public class Customer : MonoBehaviour {
     }
 
     public void init(Sit dest, bool reverse = false) {
-        var enumValue = System.Enum.GetValues(enumType:typeof(Enums.Menu)); 
-        menu = (Enums.Menu)enumValue.GetValue(Random.Range(1, enumValue.Length));
+        //var enumValue = System.Enum.GetValues(enumType:typeof(MenuSO)); 
+        //menu = (MenuSO)enumValue.GetValue(Random.Range(1, enumValue.Length));
+        menu = DataManager.instance.GetRandomMenu();
 
-        if(!reverse) {
+        if (!reverse) {
             for (int i = 0; i < dest.wayPoints.Count; i++) {
                 waypoints.Add(dest.wayPoints[i]);
             }
             waypoints.Add(dest.transform);
             sit = dest;
             orderWaitingTime = Random.Range(8, 16);
-            menuWaitingTime = Enums.MenuTime[menu] + Random.Range(12, 18);
+            menuWaitingTime = menu.GetCookingTime() + Random.Range(12, 18);
         }
         else {
             for (int i = dest.wayPoints.Count - 1; i >= 0; i--) {
@@ -49,8 +50,8 @@ public class Customer : MonoBehaviour {
         stateMachine.CurrentState._Update();
     }
 
-    public void ReceiveMenu(Enums.Menu menu) {
-        if(this.menu != menu) {
+    public void ReceiveMenu(MenuSO menu) {
+        if(this.menu.name != menu.name) {
             Debug.LogError("잘못된 메뉴 전달");
             return; 
         }

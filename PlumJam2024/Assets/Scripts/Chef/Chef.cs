@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Chef : NPC
 {
-    public Queue<Enums.Menu> WaitingQueue = new Queue<Enums.Menu>(8);
-    public Queue<Enums.Menu> CookingQueue = new Queue<Enums.Menu>(8);
-    public Queue<Enums.Menu> CompleteQueue = new Queue<Enums.Menu>(8);
+    public Queue<MenuSO> WaitingQueue = new Queue<MenuSO>(8);
+    public Queue<MenuSO> CookingQueue = new Queue<MenuSO>(2);
+    public Queue<MenuSO> CompleteQueue = new Queue<MenuSO>(8);
 
     [SerializeField] private Slider slider1;
     [SerializeField] private Slider slider2;
@@ -15,7 +15,7 @@ public class Chef : NPC
     {
         Cook, Break, Complete
     }
-    public Enums.Menu menu;
+    public MenuSO menu;
 
     private State currentState = State.Break;
 
@@ -86,7 +86,7 @@ public class Chef : NPC
         currentState = State.Cook;
     }
 
-    private void CookComplete(Enums.Menu currentMenu)
+    private void CookComplete(MenuSO currentMenu)
     {
         foreach (var item in player.completeFood)
         {
@@ -117,46 +117,16 @@ public class Chef : NPC
         }
     }
 
-    private Sprite CurrentSpriteChoicer(Enums.Menu currentMenu)
+    private Sprite CurrentSpriteChoicer(MenuSO currentMenu)
     {
-        
-        Sprite currentSprite = null;
-        if(currentMenu == Enums.Menu.cheesecake)
-        {
-            currentSprite = DataContainer.instance.cheesecake;
-        }
-        if (currentMenu == Enums.Menu.pancake)
-        {
-            currentSprite = DataContainer.instance.pancake;
-        }
-        if (currentMenu == Enums.Menu.chocolatepancake)
-        {
-            currentSprite = DataContainer.instance.chocolatepancake;
-        }
-        if (currentMenu == Enums.Menu.chocolatecake)
-        {
-            currentSprite = DataContainer.instance.chocolatecake;
-        }
-        if (currentMenu == Enums.Menu.cookiecheesecake)
-        {
-            currentSprite = DataContainer.instance.cookiecheesecake;
-        }
-        if (currentMenu == Enums.Menu.croissant)
-        {
-            currentSprite = DataContainer.instance.croissant;
-        }
-        if (currentMenu == Enums.Menu.tirimasu)
-        {
-            currentSprite = DataContainer.instance.tirimasu;
-        }
-        return currentSprite;
+        return currentMenu.GetSprite();
     }
     private void PickComplete()
     {
             player.readyQueue.Dequeue().SetActive(false);
 
     }
-    private void CookingStart(Enums.Menu currentMenu)
+    private void CookingStart(MenuSO currentMenu)
     {
         foreach (var item in player.cookingFood)
         {
@@ -213,12 +183,12 @@ public class Chef : NPC
             yield break;
         }
         cookingCount++;
-        Enums.Menu currentCook = CookingQueue.Dequeue();
+        MenuSO currentCook = CookingQueue.Dequeue();
         CookingStart(currentCook);
         
-        Debug.Log(currentCook + " 조리 시작!");
+        Debug.Log(currentCook.name + " 조리 시작!");
 
-        float duration = Enums.MenuTime[currentCook];
+        float duration = currentCook.GetCookingTime();
         slider.maxValue = duration;  // 슬라이더의 최대값을 설정
 
         float elapsedTime = 0f;
@@ -232,7 +202,7 @@ public class Chef : NPC
         }
 
         currentState = State.Complete;
-        Debug.Log(currentCook + " 조리 완료!");
+        Debug.Log(currentCook.name + " 조리 완료!");
         CompleteQueue.Enqueue(currentCook);
         
         // 슬라이더 초기화

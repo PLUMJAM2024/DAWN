@@ -4,7 +4,7 @@ public class MenuWaitState : CustomerState {
     private float maxTime;
     public override void Enter(CustomerStateMachine stateMachine) {
         base.Enter(stateMachine);
-        ShowEmoji(Enums.Emoji.menuwaiting);
+        ShowEmoji(DataManager.instance.emojis["menuwaiting"]);
         maxTime = customer.menuWaitingTime;
         direction = Vector2.zero;
         Animate();

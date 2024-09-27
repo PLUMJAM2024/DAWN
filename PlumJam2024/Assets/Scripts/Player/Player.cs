@@ -3,53 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public Queue<Enums.Menu> menuQueue = new Queue<Enums.Menu>(8);
+    public Queue<MenuSO> menuQueue = new Queue<MenuSO>(8);
     public Queue<GameObject> readyQueue = new Queue<GameObject>(8);
-    public Enums.Menu servingMenu = Enums.Menu.None;
+    public MenuSO servingMenu;
     public bool isServing = false;
 
-    [SerializeField] GameObject cheesecake;
-    [SerializeField] GameObject chocolatecake;
-    [SerializeField] GameObject cookiecheesecake;
-    [SerializeField] GameObject croissant;
-    [SerializeField] GameObject pancake;
-    [SerializeField] GameObject chocolatepancake;
-    [SerializeField] GameObject tirimasu;
+    [SerializeField] GameObject servingObject;
 
     public GameObject[] completeFood = new GameObject[5];
     public GameObject[] cookingFood = new GameObject[2];
-    public void ShowServedFood(Enums.Menu menu, bool isShow)
+    public void ShowServedFood(MenuSO menu, bool isShow)
     {
-        if (!isShow)
+        if (isShow)
         {
-            servingMenu = Enums.Menu.None;
+            servingObject.GetComponent<SpriteRenderer>().sprite = servingMenu.GetSprite();
         }
-        if (menu == Enums.Menu.cheesecake) {
-            cheesecake.SetActive(isShow);
-        }
-        if (menu == Enums.Menu.chocolatecake) {
-            chocolatecake.SetActive(isShow);
-        }
-        if (menu == Enums.Menu.cookiecheesecake) {
-            cookiecheesecake.SetActive(isShow);
-        }
-        if (menu == Enums.Menu.croissant) {
-            croissant.SetActive(isShow);
-        }
-        if (menu == Enums.Menu.pancake) {
-            pancake.SetActive(isShow);
-        }
-        if (menu == Enums.Menu.chocolatepancake) {
-            chocolatepancake.SetActive(isShow);
-        }
-        if (menu == Enums.Menu.tirimasu) {
-            tirimasu.SetActive(isShow);
+        else
+        {
+            servingObject.GetComponent<SpriteRenderer>().sprite = null;
+            servingMenu = null;
         }
     }
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R)) { // ¹ö¸®±â
             ShowServedFood(servingMenu, false);
-            servingMenu = Enums.Menu.None;
+            servingMenu = null;
             isServing = false;
         }
     }

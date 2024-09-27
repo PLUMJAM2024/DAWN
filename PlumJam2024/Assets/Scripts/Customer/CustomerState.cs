@@ -19,7 +19,7 @@ public abstract class CustomerState : MonoBehaviour
 
     public abstract void Exit();
 
-    public virtual void ShowEmoji(Enums.Emoji emoji) {
+    public virtual void ShowEmoji(EmojiSO emoji) {
         //말풍선 활성화
         customer.canvas.SetActive(true);
         //말풍선에 이모지 그리기
@@ -27,35 +27,18 @@ public abstract class CustomerState : MonoBehaviour
         customer.timer.GetComponent<Image>().sprite = GetEmojiSprite(emoji);
     }
 
-    Sprite GetEmojiSprite(Enums.Emoji emoji) {
-        switch (emoji) {
-            case Enums.Emoji.orderwaiting:
-                return DataContainer.instance.orderWaiting;
-            case Enums.Emoji.menuwaiting:
+    Sprite GetEmojiSprite(EmojiSO emoji) {
+        switch (emoji.name)
+        {
+            case "orderwaiting":
+                return DataManager.instance.emojis["orderwaiting"].GetSprite();
+            case "menuwaiting":
                 //주문한 메뉴 머리에 띄우기
-                switch (customer.menu) {
-                    case Enums.Menu.cheesecake:
-                        return DataContainer.instance.cheesecake;
-                    case Enums.Menu.chocolatecake:
-                        return DataContainer.instance.chocolatecake;
-                    case Enums.Menu.cookiecheesecake:
-                        return DataContainer.instance.cookiecheesecake;
-                    case Enums.Menu.croissant:
-                        return DataContainer.instance.croissant;
-                    case Enums.Menu.pancake:
-                        return DataContainer.instance.pancake;
-                    case Enums.Menu.chocolatepancake:
-                        return DataContainer.instance.chocolatepancake;
-                    case Enums.Menu.tirimasu:
-                        return DataContainer.instance.tirimasu;
-                    default:
-                        Debug.LogError("일치하는 스프라이트 없음");
-                        return null;
-                }
-            case Enums.Emoji.enjoying:
-                return DataContainer.instance.enjoying;
-            case Enums.Emoji.angryleaving:
-                return DataContainer.instance.angryLeaving;
+                return customer.menu.GetSprite();
+            case "enjoying":
+                return DataManager.instance.emojis["enjoying"].GetSprite();
+            case "angryleaving":
+                return DataManager.instance.emojis["angryleaving"].GetSprite();
             default:
                 Debug.LogError("일치하는 스프라이트 없음");
                 return null;
