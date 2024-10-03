@@ -1255,6 +1255,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4335536220516455539, guid: 9b286ad9adc8440468a938860674961f, type: 3}
+      propertyPath: isServing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335536220516455539, guid: 9b286ad9adc8440468a938860674961f, type: 3}
+      propertyPath: playerState
+      value: 
+      objectReference: {fileID: 11400000, guid: 7318fd27a194c5a4cae0f04c25c4a9f3, type: 2}
+    - target: {fileID: 4335536220516455539, guid: 9b286ad9adc8440468a938860674961f, type: 3}
+      propertyPath: playerStateSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 7318fd27a194c5a4cae0f04c25c4a9f3, type: 2}
+    - target: {fileID: 4335536220516455539, guid: 9b286ad9adc8440468a938860674961f, type: 3}
       propertyPath: servingObject
       value: 
       objectReference: {fileID: 620854505}
@@ -1330,7 +1342,8 @@ PrefabInstance:
       propertyPath: raycastDistance
       value: 1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4335536220516455539, guid: 9b286ad9adc8440468a938860674961f, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5498701980805874053, guid: 9b286ad9adc8440468a938860674961f, type: 3}
     - {fileID: 8701800766192393065, guid: 9b286ad9adc8440468a938860674961f, type: 3}
@@ -1343,7 +1356,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6585751715213638093, guid: 9b286ad9adc8440468a938860674961f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 620854507}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1125100867948749548, guid: 9b286ad9adc8440468a938860674961f, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1954649035}
   m_SourcePrefab: {fileID: 100100000, guid: 9b286ad9adc8440468a938860674961f, type: 3}
 --- !u!1 &199669977
 GameObject:
@@ -10292,6 +10308,38 @@ Transform:
   - {fileID: 290874820}
   m_Father: {fileID: 949765143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1954649029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1125100867948749548, guid: 9b286ad9adc8440468a938860674961f, type: 3}
+  m_PrefabInstance: {fileID: 149407657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1954649035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954649029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f61747dd6f753640b59fe1af97854c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completeFood:
+  - {fileID: 841481484}
+  - {fileID: 538204700}
+  - {fileID: 1544803934}
+  - {fileID: 723565174}
+  - {fileID: 696750495}
+  cookingFood:
+  - {fileID: 1962945163}
+  - {fileID: 949765142}
+  servingMenu: {fileID: 0}
+  playerStateMachine:
+    CurrentState: {fileID: 0}
+    servingState: {fileID: 11400000, guid: 5771db46ede335a47854648f9cc6889d, type: 2}
+    waitingState: {fileID: 11400000, guid: 7318fd27a194c5a4cae0f04c25c4a9f3, type: 2}
+  servingObject: {fileID: 620854505}
 --- !u!1 &1962945163
 GameObject:
   m_ObjectHideFlags: 0

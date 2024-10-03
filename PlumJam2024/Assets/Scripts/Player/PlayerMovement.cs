@@ -8,19 +8,19 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _playerRigid;
     private Vector2 _inputVec;
     private float _playerSpeed = 3f;
-    private float stamina = 100;
-    public float Stamina
+    private float _stamina = 100;
+    public float stamina
     {
-        get { return stamina; }
+        get { return _stamina; }
         set
         {
-            stamina = value;
-            if (stamina > 100)
+            _stamina = value;
+            if (_stamina > 100)
             {
-                stamina = 100;
+                _stamina = 100;
                 Debug.Log("스태미나 100 이상 불가");
             }
-            else if (stamina <= 0)
+            else if (_stamina <= 0)
             {
                 // 떨어뜨림
             }

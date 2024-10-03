@@ -7,14 +7,16 @@ public class Chef : NPC
 {
     public Queue<MenuSO> WaitingQueue = new Queue<MenuSO>(8);
     public Queue<MenuSO> CookingQueue = new Queue<MenuSO>(2);
-    public Queue<MenuSO> CompleteQueue = new Queue<MenuSO>(8);
+    public Queue<MenuSO> CompleteQueue = new Queue<MenuSO>(5);
 
     [SerializeField] private Slider slider1;
     [SerializeField] private Slider slider2;
+
     enum State
     {
         Cook, Break, Complete
     }
+
     public MenuSO menu;
 
     private State currentState = State.Break;
@@ -24,6 +26,7 @@ public class Chef : NPC
 
     private Coroutine cooking1;
     private Coroutine cooking2;
+
     public override void Interact()
     {
         
@@ -43,11 +46,11 @@ public class Chef : NPC
         }
     }
 
-    public override void _Update()
+    protected override void _Update()
     {
         if (WaitingQueue.Count > 0 && CookingQueue.Count < 2)
         {
-            CookingQueue.Enqueue(WaitingQueue.Dequeue());
+            CookingQueue.Enqueue(WaitingQueue.Dequeue()); // 요리 시작
         }
         if (CookingQueue.Count > 0)
         {
@@ -74,7 +77,6 @@ public class Chef : NPC
     {
         if(CompleteQueue.Count == 0) { return; }
         if (player.isServing) return;
-        player.isServing = true;
         player.servingMenu = CompleteQueue.Dequeue();
         Debug.Log(player.servingMenu + "서빙 시작!");
         player.ShowServedFood(player.servingMenu, true);
@@ -179,7 +181,7 @@ public class Chef : NPC
         }
         if (slider == null)
         {
-            Debug.LogError("Slider not found for slot: " + slot);
+            Debug.LogError("slider가 null임. 슬롯번호: " + slot);
             yield break;
         }
         cookingCount++;

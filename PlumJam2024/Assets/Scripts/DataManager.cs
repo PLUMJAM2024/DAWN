@@ -24,7 +24,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         LoadMenus();
-        LoadImojis();
+        LoadEmojis();
     }
 
     private void LoadMenus()
@@ -38,14 +38,14 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private void LoadImojis()
+    private void LoadEmojis()
     {
         EmojiSO[] loadDatas = Resources.LoadAll<EmojiSO>("Emojis");
 
-        foreach (EmojiSO imoji in loadDatas)
+        foreach (EmojiSO emoji in loadDatas)
         {
-            emojis.Add(imoji.name, imoji);
-            Debug.Log(imoji.name);
+            emojis.Add(emoji.name, emoji);
+            Debug.Log(emoji.name);
         }
     }
 

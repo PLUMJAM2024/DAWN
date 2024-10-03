@@ -1,62 +1,106 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    public float Speed;
+    private float _speed = 5;
+    private float _horizontal;
+    private float _vertical;
+    private bool _isHorizonMove;
 
-    Rigidbody2D rigid;
-    Animator anim;
-    public float h;
-    public float v;
-    bool isHorizonMove;
+    private float _raycastDistance = 1.5f;
+    private Vector2 _rayDirection;
+    public RaycastHit2D hit;
+    public Customer hitCustomer;
+    
+    private Rigidbody2D _rigid;
+    private Animator _anim;
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        _rigid = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        // Move Value
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+        RotateRay();
+        GenerateRay();
 
-        // Check Button Down & Up
+        // 이동 값
+        _horizontal = Input.GetAxisRaw("Horizontal");
+        _vertical = Input.GetAxisRaw("Vertical");
+
+        // 위아래 체크
         bool hDown = Input.GetButtonDown("Horizontal");
         bool vDown = Input.GetButtonDown("Vertical");
         bool hUp = Input.GetButtonUp("Horizontal");
         bool vUp = Input.GetButtonUp("Vertical");
 
-        // Check Horizontal Move
+        // 좌우 체크
         if (hDown)
-            isHorizonMove = true;
+            _isHorizonMove = true;
         else if (vDown)
-            isHorizonMove = false;
+            _isHorizonMove = false;
         else if (hUp || vUp)
-            isHorizonMove = h != 0;
+            _isHorizonMove = _horizontal != 0;
 
-        //Animation
-        if (anim.GetInteger("hAxisRaw") != h)
+        // 애니메이션
+        if (_anim.GetInteger("hAxisRaw") != _horizontal)
         {
-            anim.SetBool("isChange", true);
-            anim.SetInteger("hAxisRaw", (int)h);
+            _anim.SetBool("isChange", true);
+            _anim.SetInteger("hAxisRaw", (int)_horizontal);
         }
-        else if (anim.GetInteger("vAxisRaw") != v)
+        else if (_anim.GetInteger("vAxisRaw") != _vertical)
         {
-            anim.SetBool("isChange", true);
-            anim.SetInteger("vAxisRaw", (int)v);
+            _anim.SetBool("isChange", true);
+            _anim.SetInteger("vAxisRaw", (int)_vertical);
         }
         else
-            anim.SetBool("isChange", false);
+            _anim.SetBool("isChange", false);
     }
 
     private void FixedUpdate()
     {
-        // Move
-        Vector2 moveVec = isHorizonMove ? new Vector2(h, 0) : new Vector2(0, v);
-        rigid.velocity = moveVec * Speed;
+        // 이동
+        Vector2 moveVec = _isHorizonMove ? new Vector2(_horizontal, 0) : new Vector2(0, _vertical);
+        _rigid.velocity = moveVec * _speed;
+    }
+
+    // Ray 쏘기
+    public void GenerateRay()
+    {
+        // Ray를 현재 방향으로 쏨
+        hit = Physics2D.Raycast(transform.position,
+                                _rayDirection,
+                                _raycastDistance,
+                                LayerMask.GetMask("Customer"));
+
+        Debug.DrawLine(transform.position,
+                       (Vector2)transform.position + _rayDirection * _raycastDistance,
+                       Color.green);
+    }
+
+    // Ray 방향 회전
+    public void RotateRay()
+    {
+
+        Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+
+        if (_horizontal > 0f)
+        {
+            _rayDirection = Vector2.right;
+        }
+        else if (_horizontal < 0f)
+        {
+            _rayDirection = Vector2.left;
+        }
+        else if (_vertical > 0f)
+        {
+            _rayDirection = Vector2.up;
+        }
+        else if (_vertical < 0f)
+        {
+            _rayDirection = Vector2.down;
+        }
     }
 }

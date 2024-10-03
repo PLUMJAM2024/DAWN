@@ -5,12 +5,12 @@ using UnityEngine;
 public abstract class NPC : MonoBehaviour, Iinteractable
 {
     [SerializeField] private SpriteRenderer interactCheckSprite;
-    protected Player player;
+    protected PlayerController player;
 
     private const float INTERACT_DISTANCE = 2f;
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<PlayerController>();
     }
     void Update()
     {
@@ -31,7 +31,7 @@ public abstract class NPC : MonoBehaviour, Iinteractable
     }
 
     public abstract void Interact();
-    public abstract void _Update();
+    protected abstract void _Update();
     protected bool IsInteract()
     {
         if (Vector2.Distance(player.transform.position, transform.position) < INTERACT_DISTANCE)

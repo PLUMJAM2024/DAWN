@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 6585751715213638093}
   - component: {fileID: 3065726612252325731}
   - component: {fileID: 1478542470365000135}
-  - component: {fileID: 8945219717948785912}
   - component: {fileID: 4335536220516455539}
   - component: {fileID: 3177021367418913511}
   - component: {fileID: 814244358375100792}
@@ -194,19 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
---- !u!114 &8945219717948785912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125100867948749548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e3fa0c81c22b142bf71b3b3d040781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastDistance: 3
+  h: 0
+  v: 0
 --- !u!114 &4335536220516455539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,15 +207,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fac6bee404d1e4418c9abc7d068a739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  servingMenu: 0
+  completeFood:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cookingFood:
+  - {fileID: 0}
+  - {fileID: 0}
+  servingMenu: {fileID: 0}
+  playerStateSO: {fileID: 0}
   isServing: 0
-  cheesecake: {fileID: 251759230261085141}
-  chocolatecake: {fileID: 8200571446791739832}
-  cookiecheesecake: {fileID: 5176639191519830478}
-  croissant: {fileID: 6891867792270122228}
-  pancake: {fileID: 3161327280973773912}
-  chocolatepancake: {fileID: 8701800766192393065}
-  tirimasu: {fileID: 5498701980805874053}
+  servingObject: {fileID: 0}
 --- !u!50 &3177021367418913511
 Rigidbody2D:
   serializedVersion: 4
